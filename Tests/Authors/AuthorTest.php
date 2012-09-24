@@ -1,7 +1,7 @@
 <?php
-namespace Zakharovvi\HumansTxtBundle\Tests\Team;
+namespace Zakharovvi\HumansTxtBundle\Tests\Authors;
 
-use Zakharovvi\HumansTxtBundle\Team\Author;
+use Zakharovvi\HumansTxtBundle\Authors\Author;
 
 /**
  * @author Vitaliy Zakharov <zakharovvi@gmail.com>
@@ -22,7 +22,7 @@ class AuthorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @dataProvider invalidNameProvider
      */
     public function testInvalidName($invalidName)
@@ -31,7 +31,7 @@ class AuthorTest extends \PHPUnit_Framework_TestCase
     }
 
      /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @dataProvider invalidEmailProvider
      */
     public function testInvalidEmail($invalidEmail)

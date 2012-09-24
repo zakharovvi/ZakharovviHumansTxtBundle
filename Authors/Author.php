@@ -1,5 +1,5 @@
 <?php
-namespace Zakharovvi\HumansTxtBundle\Team;
+namespace Zakharovvi\HumansTxtBundle\Authors;
 
 /**
  * @author Vitaliy Zakharov <zakharovvi@gmail.com>
