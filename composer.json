@@ -1,0 +1,30 @@
+{
+    "name":"zakharovvi/humanstxt-bundle",
+    "type":"symfony-bundle",
+    "description":"Generate humans.txt file from git repository",
+    "keywords":["humans.txt"],
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Vitaliy Zakharov",
+            "email":"zakharovvi@gmail.com"
+        }
+    ],
+    "require":{
+        "php":">=5.3.3",
+        "twig/twig": "1.9.*",
+        "symfony/process": "2.1.*",
+        "symfony/console": "2.1.*",
+        "symfony/http-kernel":"2.1.*",
+        "symfony/dependency-injection": "2.1.*",
+        "symfony/config": "2.1.*",
+        "symfony/framework-bundle":"2.1.*"
+    },
+    "autoload":{
+        "psr-0":{
+            "Zakharovvi\\HumansTxtBundle":""
+        }
+    },
+    "target-dir":"Zakharovvi/HumansTxtBundle",
+    "minimum-stability":"dev"
+}
