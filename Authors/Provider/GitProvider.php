@@ -25,7 +25,8 @@ class GitProvider implements AuthorsProviderInterface
             throw new \InvalidArgumentException("$projectRoot is not a directory");
         }
         $this->process = $processBuilder->setWorkingDirectory($projectRoot)
-            ->add('git log')
+            ->add('git')
+            ->add('log')
             ->getProcess();
     }
 

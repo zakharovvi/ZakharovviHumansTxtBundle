@@ -43,7 +43,13 @@ class GitProviderTest extends \PHPUnit_Framework_TestCase
         $this->processBuilderMock
             ->expects($this->at(1))
             ->method('add')
-            ->with('git log')
+            ->with('git')
+            ->will($this->returnSelf());
+
+        $this->processBuilderMock
+            ->expects($this->at(2))
+            ->method('add')
+            ->with('log')
             ->will($this->returnSelf());
     }
 
@@ -92,7 +98,7 @@ class GitProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->addStubsToProcessBuilderMock();
         $this->processBuilderMock
-            ->expects($this->at(2))
+            ->expects($this->at(3))
             ->method('getProcess')
             ->will($this->returnSelf());
 
@@ -113,7 +119,7 @@ class GitProviderTest extends \PHPUnit_Framework_TestCase
         //ProcessBuilder
         $this->addStubsToProcessBuilderMock();
         $this->processBuilderMock
-            ->expects($this->at(2))
+            ->expects($this->at(3))
             ->method('getProcess')
             ->will($this->returnValue($processStub));
 
@@ -197,7 +203,7 @@ Date:   Wed Jul 18 04:40:40 2012 +0300
         //ProcessBuilder
         $this->addStubsToProcessBuilderMock();
         $this->processBuilderMock
-            ->expects($this->at(2))
+            ->expects($this->at(3))
             ->method('getProcess')
             ->will($this->returnValue($processStub));
         //authors
