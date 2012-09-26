@@ -1,0 +1,10 @@
+/* TEAM */
+{% for author in authors %}
+    {{ author.name }}
+    {{ author.email }}
+
+{% endfor %}
+/* SITE */
+	Language:English
+	Doctype:HTML5
+	Components:Symfony 2
