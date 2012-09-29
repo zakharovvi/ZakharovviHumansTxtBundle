@@ -1,6 +1,7 @@
 <?php
 namespace Zakharovvi\HumansTxtBundle\Tests\Writer;
 
+use Zakharovvi\HumansTxtBundle\Tests\Filesystem;
 use Zakharovvi\HumansTxtBundle\Writer\WebRootWriter;
 
 /**
@@ -13,32 +14,20 @@ class WebRootWriterTest extends \PHPUnit_Framework_TestCase
      */
     private $workspace;
 
+    /**
+     * @var \Zakharovvi\HumansTxtBundle\Tests\Filesystem
+     */
+    private $filesystem;
+
     protected function setUp()
     {
-        $this->workspace = sys_get_temp_dir().DIRECTORY_SEPARATOR.'ZakharovviHumansTxtBundleTests'.DIRECTORY_SEPARATOR.time().rand(0, 1000);
-        mkdir($this->workspace, 0777, true);
+        $this->filesystem = new Filesystem();
+        $this->workspace = $this->filesystem->getWorkspace();
     }
 
     public function tearDown()
     {
-        $this->clean($this->workspace);
-    }
-
-    /**
-     * @link https://github.com/symfony/Filesystem/blob/master/Tests/FilesystemTest.php
-     * @param string $file
-     */
-    private function clean($file)
-    {
-        if (is_dir($file) && !is_link($file)) {
-            $dir = new \FilesystemIterator($file);
-            foreach ($dir as $childFile) {
-                $this->clean($childFile);
-            }
-            rmdir($file);
-        } else {
-            unlink($file);
-        }
+        $this->filesystem->clean($this->workspace);
     }
 
     /**
@@ -63,7 +52,10 @@ class WebRootWriterTest extends \PHPUnit_Framework_TestCase
     {
         $notWritableDir = $this->workspace.DIRECTORY_SEPARATOR.'notwritable';
         mkdir($notWritableDir, 0577, true);
-        $this->setExpectedException('\Zakharovvi\HumansTxtBundle\Exception\IOException',"$notWritableDir is not writable");
+        $this->setExpectedException(
+            '\Zakharovvi\HumansTxtBundle\Exception\IOException',
+            "$notWritableDir is not writable"
+        );
         new WebRootWriter($notWritableDir);
     }
 

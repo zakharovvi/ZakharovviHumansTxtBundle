@@ -1,6 +1,7 @@
 <?php
 namespace Zakharovvi\HumansTxtBundle\Tests\Authors\Provider;
 
+use Zakharovvi\HumansTxtBundle\Tests\Filesystem;
 use Zakharovvi\HumansTxtBundle\Authors\Provider\GitProvider;
 use Zakharovvi\HumansTxtBundle\Authors\Author;
 
@@ -10,9 +11,14 @@ use Zakharovvi\HumansTxtBundle\Authors\Author;
 class GitProviderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
     protected $processBuilderMock;
+
+    /**
+     * @var \Zakharovvi\HumansTxtBundle\Tests\Filesystem
+     */
+    private $filesystem;
 
     /**
      * @var string
@@ -22,14 +28,13 @@ class GitProviderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->processBuilderMock = $this->getMock('Symfony\Component\Process\ProcessBuilder');
+        $this->filesystem = new Filesystem();
+        $this->workspace = $this->filesystem->getWorkspace();
+    }
 
-        $this->workspace = sys_get_temp_dir().
-            DIRECTORY_SEPARATOR.
-            'ZakharovviHumansTxtBundleTests'.
-            DIRECTORY_SEPARATOR.
-            time().
-            rand(0, 1000);
-        mkdir($this->workspace, 0777, true);
+    public function tearDown()
+    {
+        $this->filesystem->clean($this->workspace);
     }
 
     private function addStubsToProcessBuilderMock()
@@ -53,27 +58,6 @@ class GitProviderTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnSelf());
     }
 
-    public function tearDown()
-    {
-        $this->clean($this->workspace);
-    }
-
-    /**
-     * @link https://github.com/symfony/Filesystem/blob/master/Tests/FilesystemTest.php
-     * @param string $file
-     */
-    private function clean($file)
-    {
-        if (is_dir($file) && !is_link($file)) {
-            $dir = new \FilesystemIterator($file);
-            foreach ($dir as $childFile) {
-                $this->clean($childFile);
-            }
-            rmdir($file);
-        } else {
-            unlink($file);
-        }
-    }
     /**
      * @dataProvider invalidProjectDirProvider
      */
