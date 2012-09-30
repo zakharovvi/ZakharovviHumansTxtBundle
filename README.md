@@ -25,7 +25,7 @@ Installation
 }
 ```
 
-    And run:
+And run:
 
 ``` bash
 $ php composer.phar update zakharovvi/humanstxt-bundle
