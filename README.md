@@ -2,12 +2,14 @@ ZakharovviHumansTxtBundle
 ==================================
 
 Generate humans.txt from git repository.
+
 About humans.txt you may learn here: http://humanstxt.org/
 
 Requirements
 ------------
 
 Installed git.
+
 Initialized git repository in your Symfony 2 project
 
 Installation
