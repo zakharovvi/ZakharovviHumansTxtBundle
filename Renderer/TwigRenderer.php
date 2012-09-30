@@ -1,7 +1,7 @@
 <?php
 namespace Zakharovvi\HumansTxtBundle\Renderer;
 
-use \Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Config\FileLocatorInterface;
 
 /**
  * @author Vitaliy Zakharov <zakharovvi@gmail.com>
@@ -9,24 +9,31 @@ use \Symfony\Component\Templating\EngineInterface;
 class TwigRenderer implements RendererInterface
 {
     /**
-     * @var \Symfony\Component\Templating\EngineInterface
+     * @var \Twig_Environment
      */
-    private $templateEngine;
+    private $twig;
 
     /**
      * @var string
      */
-    private $skeletonFileName;
+    private $skeletonBaseName;
 
     /**
-     * @param \Symfony\Component\Templating\EngineInterface $templateEngine
-     * @param string                                        $skeletonFileName
-     * @throws \InvalidArgumentException If filename isn't readable
+     * @param \Symfony\Component\Config\FileLocatorInterface $fileLocator
+     * @param string $skeletonFileName
+     * @throws \InvalidArgumentException If skeleton file is not found
      */
-    public function __construct(EngineInterface $templateEngine, $skeletonFileName)
+    public function __construct(FileLocatorInterface $fileLocator, $skeletonFileName)
     {
-        $this->templateEngine = $templateEngine;
-        $this->skeletonFileName = $skeletonFileName;
+        $skeletonFileName = $fileLocator->locate($skeletonFileName);
+        $this->skeletonBaseName =  basename($skeletonFileName);
+        $skeletonBaseDir = dirname($skeletonFileName);
+        $this->twig = new \Twig_Environment(new \Twig_Loader_Filesystem($skeletonBaseDir), array(
+            'debug'            => true,
+            'cache'            => false,
+            'strict_variables' => true,
+            'autoescape'       => false,
+        ));
     }
 
     /**
@@ -34,9 +41,10 @@ class TwigRenderer implements RendererInterface
      */
     public function render(array $authors)
     {
-        return $this->templateEngine->render(
-            $this->skeletonFileName,
-            array('authors' => $authors)
-        );
+        try {
+            return $this->twig->render($this->skeletonBaseName, array('authors' => $authors));
+        } catch (\Twig_Error_Runtime $e) {
+            throw new \RuntimeException($e->getMessage());
+        }
     }
 }
