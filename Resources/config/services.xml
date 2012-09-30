@@ -4,17 +4,28 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="zakharovvi_humans_txt.example.class">Zakharovvi\HumansTxtBundle\Example</parameter>
+        <parameter key="zakharovvi.humans_txt.authors_provider.class">Zakharovvi\HumansTxtBundle\Authors\Provider\GitProvider</parameter>
+        <parameter key="zakharovvi.humans_txt.renderer.class">Zakharovvi\HumansTxtBundle\Renderer\TwigRenderer</parameter>
+        <parameter key="zakharovvi.humans_txt.writer.class">Zakharovvi\HumansTxtBundle\Writer\WebRootWriter</parameter>
     </parameters>
 
     <services>
-        <service id="zakharovvi_humans_txt.example" class="%zakharovvi_humans_txt.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="zakharovvi.humans_txt.authors_provider" class="%zakharovvi.humans_txt.authors_provider.class%">
+            <argument>%kernel.root_dir%/../</argument>
+            <argument type="service" id="zakharovvi.humans_txt.process_builder" />
         </service>
+
+        <service id="zakharovvi.humans_txt.renderer" class="%zakharovvi.humans_txt.renderer.class%">
+            <argument type="service" id="file_locator" />
+            <argument>@ZakharovviHumansTxtBundle/Resources/skeleton/humans.txt</argument>
+        </service>
+
+        <service id="zakharovvi.humans_txt.writer" class="%zakharovvi.humans_txt.writer.class%">
+            <argument>%kernel.root_dir%/../web/</argument>
+        </service>
+
+        <service id="zakharovvi.humans_txt.process_builder" class="Symfony\Component\Process\ProcessBuilder"/>
     </services>
-    -->
+
 </container>
