@@ -9,7 +9,7 @@
         processIsolation            = "false"
         stopOnFailure               = "false"
         syntaxCheck                 = "false"
-        bootstrap                   = "../../../../../app/bootstrap.php.cache"
+        bootstrap                   = "./vendor/autoload.php"
         >
 
     <testsuites>
@@ -17,4 +17,18 @@
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <!-- Ignore these for Code Coverage -->
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./Tests/</directory>
+                <directory>./Resources/</directory>
+                <directory>./DependencyInjection/</directory>
+                <directory>./Exception/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
 </phpunit>
