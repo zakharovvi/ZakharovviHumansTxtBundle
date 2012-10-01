@@ -7,7 +7,7 @@ namespace Zakharovvi\HumansTxtBundle\Renderer;
 interface RendererInterface
 {
     /**
-     * @param array $authors of @see \Zakharovvi\HumansTxtBundle\Authors\Author
+     * @param  array             $authors of @see \Zakharovvi\HumansTxtBundle\Authors\Author
      * @return string
      * @throws \RuntimeException if the template cannot be rendered
      */

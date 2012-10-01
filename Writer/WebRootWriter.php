@@ -14,7 +14,7 @@ class WebRootWriter implements WriterInterface
     private $humansTxtFileName;
 
     /**
-     * @param string $webroot
+     * @param  string                                            $webroot
      * @throws \InvalidArgumentException                         If $webroot is not a dir.
      * @throws \Zakharovvi\HumansTxtBundle\Exception\IOException If humans.txt file in $webroot is not writable.
      */
@@ -34,6 +34,6 @@ class WebRootWriter implements WriterInterface
      */
     public function write($humansTxtContent)
     {
-        return (bool)file_put_contents($this->humansTxtFileName,$humansTxtContent);
+        return (bool) file_put_contents($this->humansTxtFileName,$humansTxtContent);
     }
 }

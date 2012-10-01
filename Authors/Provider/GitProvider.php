@@ -15,8 +15,8 @@ class GitProvider implements AuthorsProviderInterface
     private $process;
 
     /**
-     * @param string         $projectRoot
-     * @param ProcessBuilder $processBuilder
+     * @param  string                    $projectRoot
+     * @param  ProcessBuilder            $processBuilder
      * @throws \InvalidArgumentException If $projectRoot isn't directory
      */
     public function __construct($projectRoot, ProcessBuilder $processBuilder)
@@ -36,6 +36,7 @@ class GitProvider implements AuthorsProviderInterface
     public function getAuthors()
     {
         $gitShortLog = $this->getGitLog();
+
         return $this->createAuthorsFromGitLog($gitShortLog);
     }
 
@@ -49,6 +50,7 @@ class GitProvider implements AuthorsProviderInterface
         if (0 !== $exitCode) {
             throw new \RuntimeException($this->process->getErrorOutput());
         }
+
         return $this->process->getOutput();
     }
 
@@ -73,6 +75,7 @@ class GitProvider implements AuthorsProviderInterface
            $author->setEmail($emails[$key]);
            $authors[] = $author;
         }
+
         return $authors;
     }
 }

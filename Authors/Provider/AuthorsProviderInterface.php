@@ -8,7 +8,7 @@ namespace Zakharovvi\HumansTxtBundle\Authors\Provider;
 interface AuthorsProviderInterface
 {
     /**
-     * @return array of @see Zakharovvi\HumansTxtBundle\Authors\Author
+     * @return array      of @see Zakharovvi\HumansTxtBundle\Authors\Author
      * @throws \Exception
      */
     public function getAuthors();

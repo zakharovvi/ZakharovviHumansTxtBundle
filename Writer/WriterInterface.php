@@ -7,7 +7,7 @@ namespace Zakharovvi\HumansTxtBundle\Writer;
 interface WriterInterface
 {
     /**
-     * @param string $humansTxtContent
+     * @param  string $humansTxtContent
      * @return bool
      */
     public function write($humansTxtContent);

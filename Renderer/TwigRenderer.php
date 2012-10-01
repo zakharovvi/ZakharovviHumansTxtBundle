@@ -19,9 +19,9 @@ class TwigRenderer implements RendererInterface
     private $skeletonBaseName;
 
     /**
-     * @param \Symfony\Component\Config\FileLocatorInterface $fileLocator
-     * @param string $skeletonFileName
-     * @throws \InvalidArgumentException If skeleton file is not found
+     * @param  \Symfony\Component\Config\FileLocatorInterface $fileLocator
+     * @param  string                                         $skeletonFileName
+     * @throws \InvalidArgumentException                      If skeleton file is not found
      */
     public function __construct(FileLocatorInterface $fileLocator, $skeletonFileName)
     {

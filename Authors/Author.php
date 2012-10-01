@@ -11,7 +11,7 @@ class Author
     private $email;
 
     /**
-     * @param string $name
+     * @param  string                    $name
      * @throws \InvalidArgumentException If author name is blank or is not a string.
      */
     public function __construct($name)
@@ -39,7 +39,7 @@ class Author
     }
 
     /**
-     * @param string $email
+     * @param  string                    $email
      * @return Author
      * @throws \InvalidArgumentException If email adress is not valid.
      */
@@ -49,8 +49,8 @@ class Author
             throw new \InvalidArgumentException('Author email must be a valid email address');
         }
         $this->email = $email;
+
         return $this;
     }
-
 
 }

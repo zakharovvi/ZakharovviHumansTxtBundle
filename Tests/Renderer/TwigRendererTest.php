@@ -38,7 +38,7 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $content
+     * @param  string $content
      * @return string
      */
     protected function initSkeletonFile($content)
@@ -50,6 +50,7 @@ class TwigRendererTest extends \PHPUnit_Framework_TestCase
             ->method('locate')
             ->with($unrealSkeletonFile)
             ->will($this->returnValue($realSkeletonFile));
+
         return $unrealSkeletonFile;
     }
 
